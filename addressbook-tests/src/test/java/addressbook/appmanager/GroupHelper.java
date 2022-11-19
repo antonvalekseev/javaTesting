@@ -14,12 +14,23 @@ public class GroupHelper extends BaseHelper {
         click(By.name("new"));
     }
 
+    public void initGroupModification() {
+        click(By.name("edit"));
+    }
+
     public void fillGroupForm(GroupData gd) {
         type(By.name("group_name"), gd.getName());
         type(By.name("group_header"), gd.getHeader());
         type(By.name("group_footer"), gd.getFooter());
+    }
+
+    public void submitGroupCreation() {
         click(By.name("submit"));
         click(By.linkText("groups"));
+    }
+
+    public void submitGroupModification() {
+        click(By.name("update"));
     }
 
     public void deleteGroup() {
