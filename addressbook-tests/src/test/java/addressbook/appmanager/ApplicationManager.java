@@ -3,6 +3,10 @@ package addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.Browser;
+import org.openqa.selenium.remote.BrowserType;
 
 public class ApplicationManager {
     public WebDriver wd;
@@ -10,10 +14,20 @@ public class ApplicationManager {
     public GroupHelper groupHelper;
     public SessionHelper sessionHelper;
     public ContactHelper contactHelper;
+    public Browser browser;
+
+    public ApplicationManager(Browser browser) {
+        this.browser = browser;
+    }
 
     public void init() {
-        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
-        wd = new ChromeDriver();
+        if (browser.equals(Browser.CHROME)) {
+            wd = new ChromeDriver();
+        } else if (browser.equals(Browser.FIREFOX)) {
+            wd = new FirefoxDriver();
+        } else if (browser.equals(Browser.EDGE)) {
+            wd = new EdgeDriver();
+        }
         groupHelper = new GroupHelper(wd);
         navigationHelper = new NavigationHelper(wd);
         sessionHelper = new SessionHelper(wd);
