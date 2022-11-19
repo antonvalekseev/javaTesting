@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.seleniumhq.selenium:selenium-java:4.1.4'
+    implementation 'org.testng:testng:7.6.0'
+    implementation 'org.slf4j:slf4j-jdk14:2.0.0-alpha7'
+}
+
+test {
+    useTestNG()
+}
