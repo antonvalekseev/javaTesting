@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import addressbook.model.ContactData;
 
-public class ContactHelper extends BaseHelper {
+public class ContactHelper extends BaseHelper{
 
     public ContactHelper (WebDriver wd) {
         super(wd);
@@ -28,4 +28,16 @@ public class ContactHelper extends BaseHelper {
         type(By.name("byear"), cd.getYear());
     }
 
+    public void openExistingContact() {
+        click(By.xpath("//tbody/tr[3]/td[8]/a[1]/img[1]"));
+    }
+
+    public void selectFirstContactInList() {
+        click(By.xpath("//input[@id='2']"));
+    }
+
+    public void deleteContactAndAccept() {
+        click(By.xpath("//input[@value='Delete']"));
+        wd.switchTo().alert().accept();
+    }
 }
