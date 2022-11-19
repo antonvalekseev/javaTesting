@@ -6,7 +6,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.Browser;
-import org.openqa.selenium.remote.BrowserType;
 
 public class ApplicationManager {
     public WebDriver wd;
@@ -43,10 +42,6 @@ public class ApplicationManager {
     public void returnToGroupPageAndLogout() {
         wd.findElement(By.linkText("groups")).click();
         wd.findElement(By.linkText("Logout")).click();
-    }
-
-    public void saveForm() {
-        wd.findElement(By.name("submit")).click();
     }
 
     public void logout() {

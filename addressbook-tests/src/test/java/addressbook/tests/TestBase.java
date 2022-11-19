@@ -6,7 +6,7 @@ import org.testng.annotations.BeforeMethod;
 import addressbook.appmanager.ApplicationManager;
 
 public class TestBase {
-    public final ApplicationManager app = new ApplicationManager(Browser.EDGE);
+    public final ApplicationManager app = new ApplicationManager(Browser.CHROME);
 
     @BeforeMethod(alwaysRun = true)
     public void setUp() throws Exception {

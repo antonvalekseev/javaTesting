@@ -37,4 +37,10 @@ public class GroupHelper extends BaseHelper {
         click(By.name("selected[]"));
         click(By.name("delete"));
     }
+
+    public void createGroup(GroupData gd) {
+        initGroupCreation();
+        fillGroupForm(gd);
+        submitGroupCreation();
+    }
 }
