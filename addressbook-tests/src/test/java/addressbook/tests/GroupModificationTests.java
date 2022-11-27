@@ -9,8 +9,8 @@ public class GroupModificationTests extends TestBase {
     @Test
     public void testGroupModification() {
         app.getNavigationHelper().goToGroupPage();
-        if (app.getGroupHelper().isElementMissing(By.name("selected[]"))) {
-            app.getGroupHelper().createGroup(new GroupData("GroupToDelete", "GroupHeaderToDelete", "GroupFiiterToDelete"));
+        if (! app.getGroupHelper().isThereAGroup()) {
+            app.getGroupHelper().createGroup(new GroupData("GroupName", "GroupHeader", "GroupFooter"));
         }
         app.getGroupHelper().initGroupModification();
         app.getGroupHelper().fillGroupForm(new GroupData("GroupNameUpdated", "HeaderUpdated", "FooterUpdated"));

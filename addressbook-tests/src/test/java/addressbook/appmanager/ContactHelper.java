@@ -50,4 +50,8 @@ public class ContactHelper extends BaseHelper{
         fillContactForm(cd);
         saveContactFormAndReturn();
     }
+
+    public boolean isThereAContact() {
+        return isElementPresent(By.name("selected[]"));
+    }
 }
