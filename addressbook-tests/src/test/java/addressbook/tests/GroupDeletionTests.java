@@ -10,7 +10,7 @@ public class GroupDeletionTests extends TestBase {
     public void testGroupCreation() throws Exception {
         app.getNavigationHelper().goToGroupPage();
         if (app.getGroupHelper().isElementMissing(By.name("selected[]"))) {
-            app.getGroupHelper().createGroup(new GroupData("GroupToDelete", "GroupHeaderToDelete", "GroupFiiterToDelete"));
+            app.getGroupHelper().createGroup(new GroupData("GroupToDelete", "GroupHeaderToDelete", "GroupFooterToDelete"));
         }
         app.getGroupHelper().deleteGroup();
         app.returnToGroupPageAndLogout();
