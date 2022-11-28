@@ -10,7 +10,7 @@ public abstract class HelperBase {
     protected WebDriver wd;
 
     public HelperBase(WebDriver wd) {
-        this.wd=wd;
+        this.wd = wd;
     }
 
     protected void click(By locator) {
@@ -22,7 +22,7 @@ public abstract class HelperBase {
 
         if (text != null) {
             String existingTest = wd.findElement(locator).getAttribute("value");
-            if (! text.equals(existingTest)) {
+            if (!text.equals(existingTest)) {
                 wd.findElement(locator).clear();
                 wd.findElement(locator).sendKeys(text);
             }
@@ -33,7 +33,7 @@ public abstract class HelperBase {
         wd.switchTo().alert().accept();
     }
 
-    public  boolean isAlertPresent() {
+    public boolean isAlertPresent() {
         try {
             wd.switchTo().alert();
             return true;

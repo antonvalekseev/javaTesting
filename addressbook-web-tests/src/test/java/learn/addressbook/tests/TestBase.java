@@ -2,21 +2,19 @@ package learn.addressbook.tests;
 
 import learn.addressbook.appmanager.ApplicationManager;
 import org.openqa.selenium.remote.Browser;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 
 public class TestBase {
+    public static final ApplicationManager app = new ApplicationManager(Browser.CHROME);
 
-    protected final ApplicationManager app = new ApplicationManager(Browser.EDGE);
-
-    @BeforeMethod
+    @BeforeSuite
     public void setUp() throws Exception {
         app.init();
     }
 
-    @AfterMethod
+    @AfterSuite
     public void tearDown() {
         app.stop();
     }
-
 }

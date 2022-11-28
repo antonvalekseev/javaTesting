@@ -1,16 +1,15 @@
 package learn.addressbook.tests;
 
-import learn.addressbook.model.ContactData;
-import learn.addressbook.model.Contacts;
 import learn.addressbook.model.GroupData;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import learn.addressbook.model.ContactData;
+import learn.addressbook.model.Contacts;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testng.Assert.assertEquals;
 
-public class ContactModificationTests extends TestBase{
+public class ContactModificationTests extends TestBase {
 
     @BeforeMethod
     public void ensurePreconditions() {
@@ -25,7 +24,7 @@ public class ContactModificationTests extends TestBase{
                     .withFirstname("Michael")
                     .withLastname("Jackson")
                     .withAddress("NY")
-                    .withMobile("+19991111111")
+                    .withMobilephone("+19991111111")
                     .withEmail("mj@test.com")
                     .withGroup("Group Name"));
         }
@@ -40,12 +39,12 @@ public class ContactModificationTests extends TestBase{
                 .withFirstname("Michael_UPD")
                 .withLastname("Jackson_UPD")
                 .withAddress("NY_UPD")
-                .withMobile("+19997777777")
+                .withMobilephone("+19991111111_UPD")
                 .withEmail("mj_UPD@test.com")
                 .withGroup("Group Name");
         app.contact().modify(contact);
+        assertThat(app.contact().count(), equalTo(before.size()));
         Contacts after = app.contact().all();
-        assertEquals(after.size(), before.size());
         assertThat(after, equalTo(before.without(modifyContact).withAdded(contact)));
     }
 }
