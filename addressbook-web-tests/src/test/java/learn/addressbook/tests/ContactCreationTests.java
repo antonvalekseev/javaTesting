@@ -1,34 +1,40 @@
 package learn.addressbook.tests;
 
 import learn.addressbook.model.ContactData;
+import learn.addressbook.model.Contacts;
 import learn.addressbook.model.GroupData;
-import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import java.util.Comparator;
-import java.util.List;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactCreationTests extends TestBase {
 
-    @Test
-    public void testsContactCreation() {
-        app.getNavigationHelper().gotoGroupPage();
-        if (! app.getGroupHelper().isThereAGroup()) {
-            app.getGroupHelper().createGroup(new GroupData("GroupName", "GroupHeader", "GroupFooter"));
+    @BeforeMethod
+    public void ensurePreconditions(){
+        app.goTo().groupPage();
+        if (app.group().all().isEmpty()) {
+            app.group().create(new GroupData()
+                    .withName("Group Name"));
         }
-        app.getNavigationHelper().gotoHomePage();
-        List<ContactData> before = app.getContactHelper().getContactList();
-        app.getContactHelper().gotoAddContactFormPage();
-        ContactData contact = new ContactData("Michael", "Jackson", "NY", "+19991111111",
-                "mj@test.com", "GroupName");
-        app.getContactHelper().fillContactForm(contact,true);
-        app.getContactHelper().submitContactCreation();
-        app.getContactHelper().returnToHomepage();
-        List<ContactData> after = app.getContactHelper().getContactList();
-        Assert.assertEquals(after.size(), before.size() + 1);
-        before.add(contact);
-        Comparator<? super ContactData> byId = (contact1, contact2) -> Integer.compare(contact1.getId(), contact2.getId());
-        before.sort(byId);
-        after.sort(byId);
-        Assert.assertEquals(before, after);
+    }
+
+    @Test
+    public void testContactCreation() {
+        app.goTo().gotoHomePage();
+        Contacts before = app.contact().all();
+        ContactData contact = new ContactData()
+                .withFirstname("Michael")
+                .withLastname("Jackson")
+                .withAddress("NY")
+                .withMobile("+19991111111")
+                .withEmail("mj@test.com")
+                .withGroup("Group Name");
+        app.contact().create(contact);
+        app.goTo().gotoHomePage();
+        Contacts after = app.contact().all();
+        assertThat(after.size(), equalTo(before.size() + 1));
+        assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((cont) -> cont.getId()).max().getAsInt()))));
     }
 }

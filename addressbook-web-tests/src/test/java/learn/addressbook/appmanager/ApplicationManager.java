@@ -6,6 +6,8 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.remote.Browser;
 
+import java.util.concurrent.TimeUnit;
+
 public class ApplicationManager {
 
     WebDriver wd;
@@ -28,27 +30,29 @@ public class ApplicationManager {
         } else if (browser.equals(Browser.EDGE)) {
             wd = new EdgeDriver();
         }
+        wd.manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
+        wd.get("http://antonalekseev.ru/addressbook/");
         groupHelper = new GroupHelper(wd);
         navigationHelper = new NavigationHelper(wd);
-        sessionHelper = new SessionHelper(wd);
         contactHelper = new ContactHelper(wd);
-        wd.get("http://antonalekseev.ru/addressbook/");
+        sessionHelper = new SessionHelper(wd);
         sessionHelper.login("admin", "secret");
     }
+
 
     public void stop() {
         wd.quit();
     }
 
-    public GroupHelper getGroupHelper() {
+    public GroupHelper group() {
         return groupHelper;
     }
 
-    public NavigationHelper getNavigationHelper() {
+    public NavigationHelper goTo() {
         return navigationHelper;
     }
 
-    public ContactHelper getContactHelper() {
+    public ContactHelper contact() {
         return contactHelper;
     }
 }
