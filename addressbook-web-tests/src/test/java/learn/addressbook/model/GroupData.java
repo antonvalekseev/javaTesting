@@ -1,9 +1,19 @@
 package learn.addressbook.model;
 
+import com.google.gson.annotations.Expose;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
+@XStreamAlias("group")
+
 public class GroupData {
+    @XStreamOmitField
     private int id = Integer.MAX_VALUE;
+    @Expose
     private String name;
+    @Expose
     private String header;
+    @Expose
     private String footer;
 
 
@@ -47,10 +57,7 @@ public class GroupData {
 
     @Override
     public String toString() {
-        return "GroupData{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                '}';
+        return "GroupData{" + "id='" + id + '\'' + ", name='" + name + '\'' + '}';
     }
 
     @Override

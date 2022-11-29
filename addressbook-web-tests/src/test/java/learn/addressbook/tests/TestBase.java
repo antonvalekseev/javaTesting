@@ -6,7 +6,7 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 
 public class TestBase {
-    public static final ApplicationManager app = new ApplicationManager(Browser.CHROME);
+    public static final ApplicationManager app = new ApplicationManager(Browser.EDGE);
 
     @BeforeSuite
     public void setUp() throws Exception {

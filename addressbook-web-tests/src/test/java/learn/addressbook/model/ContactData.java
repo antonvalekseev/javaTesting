@@ -1,19 +1,38 @@
 package learn.addressbook.model;
 
+import com.google.gson.annotations.Expose;
+import com.thoughtworks.xstream.annotations.XStreamOmitField;
+
+import java.io.File;
+
 public class ContactData {
+    @XStreamOmitField
     private int id = Integer.MAX_VALUE;
+    @Expose
     private String firstname;
+    @Expose
     private String lastname;
+    @Expose
     private String address;
+    @Expose
     private String homephone;
+    @Expose
     private String workphone;
+    @Expose
     private String mobilephone;
+    @Expose
     private String email;
+    @Expose
     private String email2;
+    @Expose
     private String email3;
+    @Expose
     private String group;
     private String allPhones;
     private String allEmails;
+    @Expose
+    private File photo;
+
 
     public int getId() {
         return id;
@@ -67,6 +86,9 @@ public class ContactData {
         return allEmails;
     }
 
+    public File getPhoto() {
+        return photo;
+    }
 
     public ContactData withId(int id) {
         this.id = id;
@@ -130,6 +152,11 @@ public class ContactData {
 
     public ContactData withAllEmails(String allEmails) {
         this.allEmails = allEmails;
+        return this;
+    }
+
+    public ContactData withPhoto(File photo) {
+        this.photo = photo;
         return this;
     }
 
