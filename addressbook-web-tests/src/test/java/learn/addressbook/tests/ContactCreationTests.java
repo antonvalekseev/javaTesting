@@ -49,8 +49,7 @@ public class ContactCreationTests extends TestBase {
             line = reader.readLine();
         }
         Gson gson = new Gson();
-        List<GroupData> contacts = gson.fromJson(json, new TypeToken<List<ContactData>>() {
-        }.getType());
+        List<ContactData> contacts = gson.fromJson(json, new TypeToken<List<ContactData>>() {}.getType());
         return contacts.stream().map((c) -> new Object[]{c}).collect(Collectors.toList()).iterator();
     }
 
@@ -64,7 +63,7 @@ public class ContactCreationTests extends TestBase {
         }
     }
 
-    @Test(dataProvider = "validContactsFromJson")
+    @Test(dataProvider = "validContactsFromXml")
     public void testContactCreation(ContactData contact) {
         app.goTo().gotoHomePage();
         Contacts before = app.contact().all();
